@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const btn = document.querySelector('.btn-country');
-const countriesContainer = document.querySelector('.countries');
+const btn = document.querySelector(".btn-country");
+const countriesContainer = document.querySelector(".countries");
 
 ///////////////////////////////////////
-const renderCountry = function (data, className = '') {
+const renderCountry = function (data, className = "") {
   const name = data.name.common;
   const flag = data.flags.svg;
   const region = data.region;
@@ -25,7 +25,7 @@ const renderCountry = function (data, className = '') {
     </div>
   </article>
   `;
-  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.insertAdjacentHTML("beforeend", html);
   countriesContainer.style.opacity = 1;
 };
 // our first api call: XMLHttpRequest
@@ -70,14 +70,14 @@ const renderCountry = function (data, className = '') {
 // const request = fetch('https://restcountries.com/v3.1/name/portugal');
 // console.log(request);
 
-const getCountryData = country => {
+const getCountryData = (country) => {
   //country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(response => {
+    .then((response) => {
       //then used to handle the promise
       return response.json(); //json is a asynchronous function that's why we have to handle this promise also
     })
-    .then(data => {
+    .then((data) => {
       renderCountry(data[0]);
 
       const neighbour = data[0].borders?.[0];
@@ -86,11 +86,11 @@ const getCountryData = country => {
 
       return fetch(`https:restcountries.com/v3.1/alpha/${neighbour}`);
     })
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .then(data => {
-      renderCountry(data[0], 'neighbour');
+    .then((data) => {
+      renderCountry(data[0], "neighbour");
     });
 };
-getCountryData('india');
+getCountryData("india");
